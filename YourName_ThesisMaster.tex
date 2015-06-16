@@ -1,0 +1,113 @@
+%
+% Copyright (c) 20XX Your Name <your email address>
+% All rights reserved.
+%
+% $Id: YourName_ThesisMaster.tex 2667 2011-01-04 02:01:13Z mshafae $
+%
+% LaTex main file for Your Name's Master Dissertation.
+%
+
+% defaults to:
+% \documentclass[letter, 12pt, oneside]{csufthesis}
+\documentclass{csufthesis}
+
+\RequirePackage{ifthen}
+
+\newboolean{xelatex}
+\setboolean{xelatex}{false}
+
+\ifthenelse{\boolean{xelatex}}
+{
+	\usepackage{fontspec}
+	\usepackage{xunicode}
+	\usepackage{xltxtra}
+	\defaultfontfeatures{Scale=MatchLowercase}
+	\setmainfont[Mapping=tex-text,Numbers={OldStyle}]{Adobe Garamond Pro}
+	\setmonofont{Inconsolata}
+	\setsansfont{Futura Std Light}
+	\setmathrm{Adobe Caslon Pro} 
+	\setboldmathrm[BoldFont=Adobe Caslon Pro Bold]{Adobe Caslon Pro}
+}{
+}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[usenames]{color}
+\usepackage{thumbpdf}
+
+\raggedright
+
+%
+% According to the CSUF thesis manual the title must
+% be in inverted pyramid style. The style currently 
+% does not do this for you automatically.
+%
+\thesistitle{The Title of This \\
+Most Excellent Dissertation}
+\degreename{Master of Science}
+\degreefield{Computer Science}
+\authorname{Tilly T. Titan}
+\committeechair{Alan Turing}
+\committeechairdepartment{Computer Science}
+\committeemembertwo{Donald Knuth}
+\committeemembertwodepartment{Computer Science}
+\committeememberthree{James Blinn}
+\committeememberthreedepartment{Computer Science}
+\degreeyear{20XX}
+\copyrightdeclaration{
+% Spaces between macros important for proper spacing.
+\copyright\ \Degreeyear\ \Authorname
+}
+
+\hypersetup{
+%  % See:
+%  % <http://www.tug.org/applications/hyperref/manual.html#x1-40003>
+  pdftitle={\Thesistitle\ },
+  pdfauthor={\Authorname\ },
+  pdfcreator={\LaTeX\ with package \guillemotleft hyperref \guillemotright },
+  pdfsubject={\Authorname's \Degreename Thesis},
+  plainpages=false
+}
+
+
+\dedications{\input{preliminary-Dedications}}
+\acknowledgments{\input{preliminary-Acknowledgement}}
+\thesisabstract{\input{preliminary-Abstract}}
+
+\begin{document}
+	
+	\preliminarypages
+	% Sets up the style for the listings in the body
+	% http://www.tug.org/tex-archive/macros/latex/contrib/listings/listings-1.3.pdf
+	\lstset{
+		language=C++,
+		frameround=tttt,
+		frame=trBL,
+		framesep=5pt,
+		basicstyle=\ttfamily,
+		keywordstyle=\ttfamily\bfseries,
+		keywordstyle=\ttfamily,
+		identifierstyle=\ttfamily, 
+		commentstyle=\ttfamily\itshape,
+		stringstyle=\ttfamily,
+	%	showstringspaces=true
+	}
+
+  \doublespacing
+	\include{chapter-1-Introduction}
+	\include{chapter-2-Previous_Work}
+	\include{chapter-3-Methodology}
+	\include{chapter-4-Experimental_Results}
+	\include{chapter-5-Conclusion}
+	
+	\appendix
+	\include{appendix-1-Misc}
+	
+	% Bibliography
+	\singlespacing
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Bibliography}
+	\bibliographystyle{acm}
+	\bibliography{thesis_bibliography}
+
+\end{document}
